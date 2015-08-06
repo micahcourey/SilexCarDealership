@@ -41,13 +41,10 @@ class Car
     return $this->picture;
   }
 
-  function certainSpecs($user_price, $user_miles) {
-
-    if (($this->price <= $user_price) && ($this->miles <= $user_miles)) {
-      return true;
-    }
-    else {
-      return false;
-    }
+  static function getAll()
+  {
+    return $_SESSION['car_list'];
   }
+
+  
 }

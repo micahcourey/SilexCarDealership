@@ -14,42 +14,21 @@
   }
 
   $app = new Silex\Application();
-  
+
   $app->register(new Silex\Provider\TwigServiceProvider(), array(
       'twig.path' => __DIR__.'/../views'
   ));
 
   $app->get("/", function() use ($app) {
-    return $app['twig']->render('carlist.html.twig');
-});
-
-  $app->get("/cars", function() {
-    $user_price = $_GET["user_price"];
-    $user_miles = $_GET["user_miles"];
-
-    $output = "";
-    $counter = 0;
-    foreach ($cars as $specific_car) {
-      if ($specific_car->certainSpecs($user_price, $user_miles)) {
-        $counter++;
-
-        $output = $output .
-            "<div><img src='" . $specific_car->getPicture() . "'</div>
-            <p>" . $specific_car->getMake() . "</p>
-            <p>". $specific_car->getMiles() ." miles</p>
-            <p>$" . $specific_car->getPrice() . "</p>
-            ";
-      }
-    }
-    if ($counter == 0) {
-        $output = $output .
-        "<p>Your search matched zero results</p>";
-    }
-
-    return $app['twig']->render('carlist.html.twig');
+    return $app['twig']->render('carsearch.html.twig', array('car_list' => Car::getAll()));
   });
 
-
+  $app->post("/cars", function() use ($app) {
+    // $car = new Car($_POST['car_list'])
+    // $user_price = $_GET["user_price"];
+    // $user_miles = $_GET["user_miles"];
+    return $app['twig']->render('carlist.html.twig');
+  });
 
   return $app;
 ?>
