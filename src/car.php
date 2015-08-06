@@ -45,6 +45,4 @@ class Car
   {
     return $_SESSION['car_list'];
   }
-
-  
 }

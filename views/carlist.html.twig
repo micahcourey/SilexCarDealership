@@ -7,8 +7,11 @@
     <h1>List of All Cars</h1>
     <ul>
         {% for car in car_list %}
-          <li>{{ car.getAll }}</li>
-        { % endfor %}
-    </ul>  
+            <img src= {{ car.getPicture }}>
+            <li>{{ car.getMake }}</li>
+            <li>{{ car.getPrice }}</li>
+            <li>{{ car.getMiles }}</li>
+        {% endfor %}
+    </ul>
   </body>
 </html>

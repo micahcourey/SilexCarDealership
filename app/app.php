@@ -14,20 +14,21 @@
   }
 
   $app = new Silex\Application();
+  $app['debug'] = true;
 
   $app->register(new Silex\Provider\TwigServiceProvider(), array(
       'twig.path' => __DIR__.'/../views'
   ));
 
   $app->get("/", function() use ($app) {
-    return $app['twig']->render('carsearch.html.twig', array('car_list' => Car::getAll()));
+    return $app['twig']->render('carsearch.html.twig');
   });
 
-  $app->post("/cars", function() use ($app) {
-    // $car = new Car($_POST['car_list'])
+  $app->get("/cars", function() use ($app) {
+    //$car = new Car($_POST['car_list'])
     // $user_price = $_GET["user_price"];
     // $user_miles = $_GET["user_miles"];
-    return $app['twig']->render('carlist.html.twig');
+    return $app['twig']->render('carlist.html.twig', array('car_list' => Car::getAll()));
   });
 
   return $app;
